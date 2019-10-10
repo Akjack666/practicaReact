@@ -9,9 +9,9 @@ export default class SaleService {
         query += start ? `start=${start}&` : "";
         query += limit ? `limit=${5}&` : "";
         query += sort ? `sort=${'ASC'}&` : "";
-        query += includeTotal ? `venta=${true}&` : "";
-        query += price ? `precio=${price}&` : "";
-        query += name ? `nombre=${name}&` : "";
+        query += includeTotal ? `sale=${true}&` : "";
+        query += price ? `price=${price}&` : "";
+        query += name ? `name=${name}&` : "";
         query += tag ? `tag=${tag}&` : "";
 
 
