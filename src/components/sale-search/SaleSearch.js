@@ -15,14 +15,13 @@ export default class SaleSearch extends React.Component {
         checkIfUserHasSignIn(this.props.history);
 
         // 3. Si el usuario especificó un tag en el registro, se debe añadir por defecto a la búsqueda
-        const result = JSON.parse(sessionStorage.getItem('currentUser'));
-    
+        const result = JSON.parse(sessionStorage.getItem('currentUser')).tag;
+        
         this.state = {
             sales: [],
-            search: result
+            search: {tag : result}
              
         };
-
         
         this.search();
 
@@ -43,11 +42,12 @@ export default class SaleSearch extends React.Component {
     search() {
         // 2. Llamar al servicio service.getSales(this.state.search), gestionar su petición y añadir al estado su resultado
         service.getSales(this.state.search).then((res) => {
-            if (res.results) {
-                console.log(res.results)
+            if (res.result) {
                 this.setState({
-                    sales: res.results
+                    sales: res.result.rows
+
                 })
+                
             }
         });
     }
@@ -74,7 +74,7 @@ export default class SaleSearch extends React.Component {
                     {
                         this.state.tags
                         &&
-                        <select name="tag" value={this.state.search.tag} onChange={this.handleSearch} className={`form-control col-2 ml-4`}>
+                        <select name="tag" value={this.state.search.tag ? this.state.search.tag : ""} onChange={this.handleSearch} className={`form-control col-2 ml-4`}>
                             <option value="">Filter by tag</option>
                             {this.state.tags.map((tag, index) => <option key={`${tag}-${index}`} value={tag}>{tag}</option>)}
                         </select>

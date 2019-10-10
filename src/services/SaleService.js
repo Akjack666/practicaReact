@@ -12,6 +12,7 @@ export default class SaleService {
         query += includeTotal ? `venta=${true}&` : "";
         query += price ? `precio=${price}&` : "";
         query += name ? `nombre=${name}&` : "";
+        query += tag ? `tag=${tag}&` : "";
 
 
         // 2. Faltan añadir a la query los demás campos
@@ -27,20 +28,14 @@ export default class SaleService {
 
     getTags() {
         return new Promise((resolve, reject) => {
-            let query = `?fields=tags`;
-            fetch(`${HOST}/${API}/anuncios${query}`)
+            fetch(`${HOST}/${API}/anuncios/tags`)
                 .then(function (response) {
-
                     return response.json();
                 })
                 .then(function (myJson) {
-
-
-                    console.log(myJson)
                     return resolve({
-
                         ok: true,
-                        allowedTags: myJson.results[0].tags
+                        allowedTags: myJson.allowedTags
                     })
 
 

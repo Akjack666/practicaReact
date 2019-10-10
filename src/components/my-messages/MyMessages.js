@@ -13,7 +13,6 @@ export default class MyMessages extends Component {
 
         if (!messages) messages = [];
 
-        console.log(messages)
         return (
             <div>
                 <h4 className={`ml-2 mb-4`}>Your messages</h4>
